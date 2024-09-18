@@ -33,6 +33,8 @@ route_allsync{
 }
 ```
 
+Replace <var>POOL_NAME</var> with the name of a pool defined in the `pools{}` block of your configuration file.
+
 ### `route_allfastest`
 
 Routes the request a list of pools, in parallel.
@@ -53,8 +55,8 @@ The proxy waits only for a response from the pool assigned to the argumment `chi
 
 ```lua
 route_split{
-    child_a = "{{<var>}}POOL_NAME_A{{</var>}}"
-    child_b = "{{<var>}}POOL_NAME_B{{</var>}}"
+    child_a = "{{<var>}}POOL_NAME_A{{</var>}}",
+    child_b = "{{<var>}}POOL_NAME_B{{</var>}}",
 }
 ```
 
@@ -69,11 +71,14 @@ For more information about these requests, see [Basic Text Protocol](/protocols/
 ```lua
 route_ttl{
   ttl = {{<var>}}TTL{{</var>}},
-  child = "{{<var>}}POOL_NAME{{</var>}}"
+  child = "{{<var>}}POOL_NAME{{</var>}}",
 }
 ```
 
-Replace <var>TTL</var> with an integer representing the new TTL value.
+Replace the following:
+
+* <var>TTL</var>: an integer representing the new TTL value.
+* <var>POOL_NAME</var>: the name of a pool defined in the `pools{}` block of your configuration file.
 
 ### `route_failover`
 
@@ -104,8 +109,8 @@ To use this handler, you need to define zones in your configuration file. For mo
 ```lua
 route_zfailover{
     children = "{{<var>}}SET_NAME{{</var>}}",
-    stats = true,
-    miss = true
+    stats = {{<var>}}STATS_BOOLEAN{{</var>}},
+    miss = {{<var>}}MISS_BOOLEAN{{</var>}},
 }
 ```
 
